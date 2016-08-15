@@ -1,6 +1,15 @@
-import { Meteor } from 'meteor/meteor';
-import { name as PartyAdd } from '../partyAdd';
-import { Parties } from '../../../../api/parties';
+import {
+  Meteor
+}
+from 'meteor/meteor';
+import {
+  name as PartyAdd
+}
+from '../partyAdd';
+import {
+  Parties
+}
+from '../../../../api/parties';
 import 'angular-mocks';
 
 describe('PartyAdd', () => {
@@ -11,8 +20,8 @@ describe('PartyAdd', () => {
   describe('controller', () => {
     let controller;
     const party = {
-      name: 'Foo',
-      description: 'Birthday of Foo',
+      question: 'Foo',
+      answer: 'Answer of Foo',
       public: true
     };
     const user = {
@@ -50,8 +59,8 @@ describe('PartyAdd', () => {
 
       it('should insert a new party', () => {
         expect(Parties.insert).toHaveBeenCalledWith({
-          name: party.name,
-          description: party.description,
+          question: party.question,
+          answer: party.answer,
           public: party.public,
           owner: user._id
         });

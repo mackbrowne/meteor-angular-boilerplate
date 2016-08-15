@@ -1,7 +1,16 @@
-import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import {
+  Meteor
+}
+from 'meteor/meteor';
+import {
+  Counts
+}
+from 'meteor/tmeasday:publish-counts';
 
-import { Parties } from './collection';
+import {
+  Parties
+}
+from './collection';
 
 if (Meteor.isServer) {
   Meteor.publish('parties', function(options, searchString) {
@@ -37,9 +46,9 @@ if (Meteor.isServer) {
     };
 
     if (typeof searchString === 'string' && searchString.length) {
-      selector.name = {
+      selector.question = {
         $regex: `.*${searchString}.*`,
-        $options : 'i'
+        $options: 'i'
       };
     }
 

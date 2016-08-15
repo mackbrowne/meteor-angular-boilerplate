@@ -2,12 +2,20 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
-import { Meteor } from 'meteor/meteor';
+import {
+  Meteor
+}
+from 'meteor/meteor';
 
 import template from './partyDetails.html';
-import { Parties } from '../../../api/parties';
-import { name as PartyUninvited } from '../partyUninvited/partyUninvited';
-import { name as PartyMap } from '../partyMap/partyMap';
+import {
+  Parties
+}
+from '../../../api/parties';
+import {
+  name as PartyUninvited
+}
+from '../partyUninvited/partyUninvited';
 
 class PartyDetails {
   constructor($stateParams, $scope, $reactive) {
@@ -22,16 +30,16 @@ class PartyDetails {
 
     this.helpers({
       party() {
-        return Parties.findOne({
-          _id: $stateParams.partyId
-        });
-      },
-      users() {
-        return Meteor.users.find({});
-      },
-      isLoggedIn() {
-        return !!Meteor.userId();
-      }
+          return Parties.findOne({
+            _id: $stateParams.partyId
+          });
+        },
+        users() {
+          return Meteor.users.find({});
+        },
+        isLoggedIn() {
+          return !!Meteor.userId();
+        }
     });
   }
 
@@ -48,8 +56,8 @@ class PartyDetails {
       _id: this.party._id
     }, {
       $set: {
-        name: this.party.name,
-        description: this.party.description,
+        question: this.party.question,
+        answer: this.party.answer,
         public: this.party.public,
         location: this.party.location
       }
@@ -67,15 +75,14 @@ const name = 'partyDetails';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor,
-  uiRouter,
-  PartyUninvited,
-  PartyMap
-]).component(name, {
-  template,
-  controllerAs: name,
-  controller: PartyDetails
-})
+    angularMeteor,
+    uiRouter,
+    PartyUninvited
+  ]).component(name, {
+    template,
+    controllerAs: name,
+      controller: PartyDetails
+  })
   .config(config);
 
 function config($stateProvider) {

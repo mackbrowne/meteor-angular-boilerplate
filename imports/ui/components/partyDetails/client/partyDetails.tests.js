@@ -1,5 +1,11 @@
-import { name as PartyDetails } from '../partyDetails';
-import { Parties } from '../../../../api/parties';
+import {
+  name as PartyDetails
+}
+from '../partyDetails';
+import {
+  Parties
+}
+from '../../../../api/parties';
 import 'angular-mocks';
 
 describe('PartyDetails', () => {
@@ -11,8 +17,8 @@ describe('PartyDetails', () => {
     let controller;
     const party = {
       _id: 'partyId',
-      name: 'Foo',
-      description: 'Birthday of Foo',
+      question: 'Foo',
+      answer: 'Birthday of Foo',
       public: true
     };
 
@@ -40,8 +46,8 @@ describe('PartyDetails', () => {
       it('should update with proper modifier', () => {
         expect(Parties.update.calls.mostRecent().args[1]).toEqual({
           $set: {
-            name: party.name,
-            description: party.description,
+            question: party.question,
+            answer: party.answer,
             public: party.public
           }
         });
