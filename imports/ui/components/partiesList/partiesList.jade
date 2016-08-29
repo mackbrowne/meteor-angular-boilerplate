@@ -1,0 +1,44 @@
+.container-fluid
+  .row
+    .col-md-12
+      party-add(ng-show='partiesList.isLoggedIn')
+      .alert.alert-warning(role='alert', ng-hide='partiesList.isLoggedIn')
+        strong Warning!
+        |         Log in to create a party!
+  .row
+    .col-md-12
+      h2 List of flash cards:
+      form.form-inline
+        .form-group
+          input.form-control(type='search', ng-model='partiesList.searchText', placeholder='Search')
+        parties-sort.form-group(on-change='partiesList.sortChanged(sort)', property='name', order='1')
+  .row
+    .col-md-12
+      ul.parties
+        li(dir-paginate='party in partiesList.parties | itemsPerPage: partiesList.perPage', total-items='partiesList.partiesCount')
+          .row
+            .col-sm-8
+              h3.question-body
+                a(ui-sref='partyDetails({ partyId: party._id })') {{party.question}}
+              p.question-answer
+                | {{party.answer}}
+            .col-sm-4
+              party-remove(party='party', ng-show='partiesList.isOwner(party)')
+          //
+            <div class="row">
+            <div class="col-md-12">
+            <party-rsvp party="party" ng-show="partiesList.isLoggedIn"></party-rsvp>
+            <div class="alert alert-warning" role="alert" ng-hide="partiesList.isLoggedIn">
+            <strong>Warning!</strong>
+            <i>Sign in to RSVP for this party.</i>
+            </div>
+            </div>
+            </div>
+          .row
+            .col-md-4
+              party-creator(party='party')
+            //
+              <div class="col-md-8">
+              <party-rsvps-list rsvps="party.rsvps"></party-rsvps-list>
+              </div>
+      dir-pagination-controls(on-page-change='partiesList.pageChanged(newPageNumber)')

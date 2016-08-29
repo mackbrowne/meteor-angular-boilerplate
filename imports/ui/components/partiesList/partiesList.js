@@ -8,7 +8,7 @@ import {
 }
 from 'meteor/tmeasday:publish-counts';
 
-import template from './partiesList.html';
+import template from './partiesList.jade';
 import {
   Parties
 }
@@ -61,19 +61,19 @@ class PartiesList {
 
     this.helpers({
       parties() {
-          return Parties.find({}, {
-            sort: this.getReactively('sort')
-          });
-        },
-        partiesCount() {
-          return Counts.get('numberOfParties');
-        },
-        isLoggedIn() {
-          return !!Meteor.userId();
-        },
-        currentUserId() {
-          return Meteor.userId();
-        }
+        return Parties.find({}, {
+          sort: this.getReactively('sort')
+        });
+      },
+      partiesCount() {
+        return Counts.get('numberOfParties');
+      },
+      isLoggedIn() {
+        return !!Meteor.userId();
+      },
+      currentUserId() {
+        return Meteor.userId();
+      }
     });
   }
 
@@ -106,7 +106,7 @@ export default angular.module(name, [
   ]).component(name, {
     template,
     controllerAs: name,
-      controller: PartiesList
+    controller: PartiesList
   })
   .config(config);
 
